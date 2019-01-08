@@ -157,23 +157,6 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
     super.dispose();
   }
 
-  Widget _buildTransitionsStack() {
-    final List<FadeTransition> transitions = <FadeTransition>[];
-
-    for (NavigationIconView view in _navigationViews)
-      transitions.add(view.transition(_type, context));
-
-    // We want to have the newly animating (fading in) views on top.
-    transitions.sort((FadeTransition a, FadeTransition b) {
-      final Animation<double> aAnimation = a.opacity;
-      final Animation<double> bAnimation = b.opacity;
-      final double aValue = aAnimation.value;
-      final double bValue = bAnimation.value;
-      return aValue.compareTo(bValue);
-    });
-
-    return Stack(children: transitions);
-  }
 
   @override
   Widget build(BuildContext context) {
