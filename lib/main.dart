@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './drawer_app.dart';
 import './carousel_with_indicator.dart';
 import './home_cat.dart';
+import './bottom_navigation.dart';
 
 void main() => runApp(MyApp());
 
@@ -49,7 +50,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Image.asset('assets/title.png', fit: BoxFit.cover),
+        title: new Image.asset('assets/title.png'),
       ),
       drawer: Drawer(
         child: DrawerApp(),
@@ -66,6 +67,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationDemo() ,
     );
   }
 }

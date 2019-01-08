@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 final List<String> imgList = [
   
-  'http://boninja.com/storage/app/AppSlider/7Zj5IRIFV95wejU9oeRN55WwC9RVgXtWyYHfK1ua.png',
-  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  'http://boninja.com/storage/app/AppSlider/LFsnPB5Z3RWn3tPtA6ycwH5nGTEDg5M7iINIhX2G.jpeg',
+  'http://boninja.com/storage/app/AppSlider/ryjdqSl9davYn5bCCs46bcTkJtq65xHcAuwUealx.jpeg'
 ];
 final List child = map<Widget>(imgList, (index, i) {
   return Container(
