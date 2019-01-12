@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import '../pages/product.dart';
 
 class MainFeaturedScroll extends StatefulWidget {
   @override
@@ -29,7 +30,12 @@ class _MainFeaturedScrollState extends State<MainFeaturedScroll> {
                     child: Center(
                       child: CupertinoButton(
                         child: Card(),
-                        onPressed: () {},
+                        onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ProductPage()),
+                            ),
                       ),
                     ),
                   ),
