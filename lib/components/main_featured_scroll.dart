@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../pages/product.dart';
+import '../pages/product/product.dart';
 
 class MainFeaturedScroll extends StatefulWidget {
   @override
