@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import '../components/drawer_app.dart';
 //import '../../components/bottom_navigation.dart';
 import '../../components/carousel_with_indicator.dart';
-//import 'header.dart';
+import 'header.dart';
 import 'footer.dart';
 
 class ProductPage extends StatelessWidget {
@@ -20,20 +20,21 @@ class ProductPage extends StatelessWidget {
         backgroundColor: Colors.white,
         title: toolbar,
       ),
-     /* drawer: Drawer(
+      /* drawer: Drawer(
         child: DrawerApp(),
       ),*/
       body: new ListView(
-      children: <Widget>[
-        //new MHeader(),
-        CarouselWithIndicator(),
-        favnprice,
-        divider,
-        new Mfooter(),
-        bottomBtns
-      ],
-    ),
-     //bottomNavigationBar: BottomNavigationDemo(),
+        children: <Widget>[
+          CarouselWithIndicator(),
+          new MHeader(),
+          favnprice,
+          soldnprice,
+          divider,
+          new Mfooter(),
+          bottomBtns
+        ],
+      ),
+      //bottomNavigationBar: BottomNavigationDemo(),
     );
   }
 }

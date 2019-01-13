@@ -35,18 +35,14 @@ var _appbar = new Align(
 );
 
 var content = new Container(
-  margin: new EdgeInsets.only(top: 30.0),
+  margin: new EdgeInsets.only(top: 5.0),
   child: new Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        new Image(
-          width: 140.0,
-          height: 140.0,
-          image: new AssetImage("assets/googlehome.png"),
-        ),
+        
         new Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: const EdgeInsets.only(top: 3.0),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -77,15 +73,15 @@ var content = new Container(
               new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    new Text('Google Home',
+                    new Text('محصول ویژه',
                         style: new TextStyle(
                             fontSize: 20.0,
-                            fontFamily: "OpenSans",
+                            fontFamily: "Yekan",
                             fontWeight: FontWeight.w300,
                             fontStyle: FontStyle.normal)),
                     new Padding(
                       padding: const EdgeInsets.only(left: 28.0, top: 12.0),
-                      child: new Text("Google LLC",
+                      child: new Text("با 50 % تخفیف",
                           style: new TextStyle(
                             color: Colors.black87.withOpacity(.3),
                           )),
@@ -95,7 +91,8 @@ var content = new Container(
                 width: 60.0,
                 height: 60.0,
                 decoration: new BoxDecoration(
-                    gradient: btnGradient,
+                    //gradient: btnGradient,
+                    color: Color(0xFF005AAA),
                     shape: BoxShape.circle,
                     boxShadow: <BoxShadow>[
                       new BoxShadow(
@@ -119,22 +116,16 @@ class MHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: 280.0,
+      height: 80.0,
       child: new Stack(
         children: <Widget>[
-          new ClipPath(
-            clipper: new ArcClipper(),
-            child: new Container(
-              //height: double,
-              decoration: new BoxDecoration(gradient: bgGradient),
-            ),
-          ),
+         
           new Align(
             alignment: FractionalOffset.center,
             heightFactor: 3.5,
             child: content,
           ),
-          _appbar
+          
         ],
       ),
     );

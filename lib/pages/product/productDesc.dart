@@ -4,21 +4,31 @@ class ProductDesc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: new Text(
-          "A smart Personal assistant at your beck and call, who makes doing your everyday tasks"
-              "easier - isn't that the dream? whether it it managing your calendar, playing music, or "
-              "controlling your home entertainment, these can all be done by the Google Home - all you have to do is say "
-              "\"Ok Google\" \n\n you can know the status of real-time information such as the current weather, important news,"
-              "match dates and scores of your favourite sports team and much more by using your voice.",
-          style: new TextStyle(
-              fontFamily: "OpenSans",
-              color: Colors.black,
-              fontSize: 13.0,
-              fontWeight: FontWeight.w200),
+        body: new ListView(
+      children: <Widget>[
+        new Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: new Text(
+            "زمین تنیس آزاد مجموعه یونیک \t"
+                "تاثیرات تنیس بر زندگی شما: \t"
+                "مصرف کالری \n"
+                "تقویت عضلات \n"
+                "زندگی شادابتر \n"
+                "تفریحی هیجان انگیز  \n"
+                "مجموعه یونیک: \n"
+                "دارای محیطی استاندارد \n"
+                "ارایه توپ و راکت به صورت پرداخت جداگانه در محل. \n"
+                " جهت استفاده از زمین حتما از قبل رزرو کنید.  \n"
+                "ارایه توپ و راکت به صورت پرداخت جداگانه در محل. \n"
+                " استفاده از زمین شامل روزهای پنج شنبه و جمعه نمی باشد.  \n",
+            style: new TextStyle(
+                fontFamily: "Yekan",
+                color: Colors.black,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w200),
+          ),
         ),
-      ),
-    );
+      ],
+    ),);
   }
 }

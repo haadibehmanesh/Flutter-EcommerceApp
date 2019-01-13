@@ -19,27 +19,67 @@ var favnprice = new Padding(
               color: Colors.red,
             ),
           ),
-          new Text("Add to wishList")
+          new Text("علاقه مندی ها")
         ],
       ),
       new Row(
         children: <Widget>[
-          new Padding(
+          
+          new Text(
+            "25,000",
+            style: new TextStyle(fontSize: 35.0,color: Colors.green),
+          ),new Padding(
             padding: const EdgeInsets.all(8.0),
             child: new Text(
-              "\$",
-              style: new TextStyle(fontSize: 20.0),
+              "\تومان",
+              style: new TextStyle(fontSize: 20.0,color: Colors.green),
             ),
           ),
-          new Text(
-            "9999.00",
-            style: new TextStyle(fontSize: 35.0),
-          )
+          
         ],
       )
     ],
   ),
 );
+
+var soldnprice = new Padding(
+  padding:
+      const EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0, bottom: 12.0),
+  child: new Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+      new Row(
+        children: <Widget>[
+          new Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: new Icon(
+              Icons.shopping_basket,
+              color: Colors.grey,
+            ),
+          ),
+          new Text("100")
+        ],
+      ),
+      new Row(
+        children: <Widget>[
+          
+          new Text(
+            "50,000",
+            style: new TextStyle(fontSize: 20.0,color: Colors.red),
+          ),new Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: new Text(
+              "\تومان",
+              style: new TextStyle(fontSize: 20.0,color: Colors.red),
+            ),
+          ),
+          
+        ],
+      )
+    ],
+  ),
+);
+
 
 var divider = new Divider();
 
@@ -123,19 +163,19 @@ class _MfooterState extends State<Mfooter> with SingleTickerProviderStateMixin {
       new Tab(
         child: new Text(
           "ویژگی ها",
-          style: new TextStyle(color: Colors.black),
+          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17.0),
         ),
       ),
       new Tab(
         child: new Text(
           "شرایط استفاده",
-          style: new TextStyle(color: Colors.black),
+          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17.0),
         ),
       ),
       new Tab(
         child: new Text(
           "نظرات",
-          style: new TextStyle(color: Colors.black),
+          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17.0),
         ),
       ),
     ];
