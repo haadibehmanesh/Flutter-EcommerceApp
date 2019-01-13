@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'gredients.dart';
+//import 'gredients.dart';
 import './specification.dart';
 import './productDesc.dart';
 import './userReviews.dart';
@@ -55,7 +55,8 @@ var bottomBtns = new Padding(
             borderRadius: new BorderRadius.all(new Radius.circular(50.0)),
             child: new Container(
               decoration: new BoxDecoration(
-                  gradient: btnGradient,
+                  //gradient: btnGradient,
+                  color: Colors.green,
                   boxShadow: <BoxShadow>[
                     new BoxShadow(
                         blurRadius: 10.0,
@@ -85,7 +86,8 @@ var bottomBtns = new Padding(
           width: 60.0,
           height: 60.0,
           decoration: new BoxDecoration(
-              gradient: btnGradient,
+              //gradient: btnGradient,
+              color: Colors.orange,
               shape: BoxShape.circle,
               boxShadow: <BoxShadow>[
                 new BoxShadow(

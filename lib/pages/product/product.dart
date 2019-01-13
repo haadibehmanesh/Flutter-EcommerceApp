@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 //import '../components/drawer_app.dart';
-import '../../components/bottom_navigation.dart';
-import 'header.dart';
+//import '../../components/bottom_navigation.dart';
+import '../../components/carousel_with_indicator.dart';
+//import 'header.dart';
 import 'footer.dart';
 
 class ProductPage extends StatelessWidget {
@@ -24,7 +25,8 @@ class ProductPage extends StatelessWidget {
       ),*/
       body: new ListView(
       children: <Widget>[
-        new MHeader(),
+        //new MHeader(),
+        CarouselWithIndicator(),
         favnprice,
         divider,
         new Mfooter(),

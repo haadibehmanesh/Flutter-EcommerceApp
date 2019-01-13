@@ -9,7 +9,7 @@ var bgGradient = new LinearGradient(
 );
 
 var btnGradient = new LinearGradient(
-  colors: [const Color(0xFF37ecba), const Color(0xFF72afd3)], 
+  colors: [const Color(0xFF37ecba), const Color(0xFF005AAA)], 
   tileMode: TileMode.clamp,
   begin: Alignment.bottomCenter,
   end: Alignment.topCenter,

@@ -18,6 +18,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appTitle,
+      theme: ThemeData(fontFamily: 'Yekan'),
       home: MyHomePage(title: appTitle),
       builder: (BuildContext context, Widget child) {
         return new Directionality(
