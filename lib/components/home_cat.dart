@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'cat_card.dart';
 
 class HomeCat extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _HomeCatState();
+}
+
+void _onTileClicked(String index) {
+  debugPrint("You tapped on item $index");
 }
 
 class _HomeCatState extends State<HomeCat> {
@@ -26,7 +31,16 @@ class _HomeCatState extends State<HomeCat> {
           'http://boninja.com/storage/app/6t7vqoQfq4JJ471YI2giuqMfXcVZEU8vUXGAd9rt.png',
           'http://boninja.com/storage/app/2F1MJaWgk30uzyv70PaIhB5tB6xbX9Dq4E6AAO88.png',
         ].map((String url) {
-          return new GridTile(child: new Image.network(url, fit: BoxFit.cover));
+          return new GridTile(
+              child: InkResponse(
+            child: new Image.network(url, fit: BoxFit.cover),
+            onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => MyCard(),
+                  ),
+                ),
+          ));
         }).toList());
   }
 }

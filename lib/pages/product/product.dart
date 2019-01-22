@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 //import '../components/drawer_app.dart';
 //import '../../components/bottom_navigation.dart';
+import 'product_timer.dart';
 import '../../components/carousel_product.dart';
 import 'header.dart';
 import 'footer.dart';
@@ -10,9 +11,9 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Row toolbar = new Row(children: <Widget>[
       new Expanded(
-          child: const Text('محصول ویژه',
+          child: const Text('زمین تنیس آزاد یونیک ۲',
               style: TextStyle(color: Color(0xFF005AAA)))),
-      //new Icon(Icons.arrow_forward)
+      
     ]);
     return Scaffold(
       appBar: AppBar(
@@ -27,7 +28,10 @@ class ProductPage extends StatelessWidget {
         children: <Widget>[
           CarouselProduct(),
           new MHeader(),
+          
           favnprice,
+          //new ProductTimer(),
+          divider,
           soldnprice,
           divider,
           new Mfooter(),

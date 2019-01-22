@@ -5,6 +5,7 @@ import '../components/home_cat.dart';
 import '../components/bottom_navigation.dart';
 import '../components/main_featured_scroll.dart';
 import '../components/main_cat_scroll.dart';
+
 class MyHomePage extends StatelessWidget {
   final String title;
   MyHomePage({Key key, this.title}) : super(key: key);
