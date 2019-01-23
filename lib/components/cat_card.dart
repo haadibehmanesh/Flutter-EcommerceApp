@@ -3,7 +3,9 @@
 // found in the LICENSE file.
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter/material.dart';
+import '../pages/product/product.dart';
 
 //import '../../gallery/demo.dart';
 
@@ -32,68 +34,173 @@ class CustomCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8.0),
         //height: height,
-        child: Card(
+        child: new GestureDetector(
+  onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ProductPage()),
+                            ),
+  child: new Card(
           child: new Column(
             children: <Widget>[
+              new Row(children: <Widget>[
+                Expanded(
+                  child: Container(
+                    color: Colors.orange,
+                    child: new Padding(
+                      padding: new EdgeInsets.all(7.0),
+                      child: new Text(
+                        'فست فود انجیر',
+                        style:
+                            new TextStyle(color: Colors.white, fontSize: 18.0),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
               new Container(
                 constraints: new BoxConstraints.expand(
                   height: 200.0,
                 ),
-                alignment: Alignment.bottomLeft,
-                padding: new EdgeInsets.only(left: 16.0, bottom: 8.0),
+                alignment: Alignment.bottomRight,
+                padding:
+                    new EdgeInsets.only(right: 16.0, bottom: 8.0, left: 16.0),
                 decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                        image: new NetworkImage(
-                            'https://boninja.com/storage/bi-products/December2018/rTT72xwlsvsER90Tgv4t.jpg'),
-                        fit: BoxFit.cover)),
-                child: new Text('Title',
-                    style: new TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                    )),
+                  
+                  image: new DecorationImage(
+                      image: new NetworkImage(
+                          'https://boninja.com/storage/bi-products/December2018/rTT72xwlsvsER90Tgv4t.jpg'),
+                      fit: BoxFit.cover),
+                ),
+                
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    new Container(
+                      width: 70.0,
+                      height: 30.0,
+                      decoration: new BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              new BorderRadius.all(new Radius.circular(30.0)),
+                          boxShadow: <BoxShadow>[
+                            new BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 10.0,
+                                offset: new Offset(0.0, 10.0))
+                          ]),
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                          ),
+                          new Text("4.8")
+                        ],
+                      ),
+                    ),
+                    new Container(
+                      width: 70.0,
+                      height: 30.0,
+                      decoration: new BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              new BorderRadius.all(new Radius.circular(30.0)),
+                          boxShadow: <BoxShadow>[
+                            new BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 10.0,
+                                offset: new Offset(0.0, 10.0))
+                          ]),
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new Icon(
+                            Icons.place,
+                            color: Colors.red,
+                          ),
+                          new Text("شیراز")
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Row(children: <Widget>[
-                new Padding(
-                  padding: new EdgeInsets.all(7.0),
-                  child: new Text(
-                    'فست فود انجیر',
-                    style: new TextStyle(fontSize: 18.0),
-                    textAlign: TextAlign.right,
+              new Row(children: <Widget>[
+                Expanded(
+                  child: Container(
+                    color: Color(0xFF005AAA),
+                    child: new Padding(
+                      padding: new EdgeInsets.symmetric(horizontal: 10.0,vertical: 2.0),
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          new Row(
+                            children: <Widget>[
+                              new Text(
+                                "50,000",
+                                style: new TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              new Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: new Text(
+                                  "\تومان",
+                                  style: new TextStyle(
+                                      fontSize: 16.0, color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                          new Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: new BoxDecoration(
+                                //gradient: btnGradient,
+                                color: Colors.orange,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: new Text(
+                                  '50 %',
+                                  style: new TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )),
+                          new Row(
+                            children: <Widget>[
+                              new Text(
+                                "25,000",
+                                style: new TextStyle(
+                                    fontSize: 16.0, color: Colors.white),
+                              ),
+                              new Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: new Text(
+                                  "\تومان",
+                                  style: new TextStyle(
+                                      fontSize: 16.0, color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ]),
-              new Divider(
-                color: Colors.red,
-              ),
-              new Padding(
-                  padding: new EdgeInsets.all(7.0),
-                  child: new Row(
-                    children: <Widget>[
-                      new Padding(
-                        padding: new EdgeInsets.all(7.0),
-                        child: new Icon(Icons.thumb_up),
-                      ),
-                      new Padding(
-                        padding: new EdgeInsets.all(7.0),
-                        child: new Text(
-                          'Like',
-                          style: new TextStyle(fontSize: 18.0),
-                        ),
-                      ),
-                      new Padding(
-                        padding: new EdgeInsets.all(7.0),
-                        child: new Icon(Icons.comment),
-                      ),
-                      new Padding(
-                        padding: new EdgeInsets.all(7.0),
-                        child: new Text('Comments',
-                            style: new TextStyle(fontSize: 18.0)),
-                      )
-                    ],
-                  ))
             ],
           ),
-        ),
+        ),),
       ),
     );
   }

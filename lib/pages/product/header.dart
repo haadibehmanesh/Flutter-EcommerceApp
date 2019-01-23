@@ -157,12 +157,12 @@ var soldnprice = new Padding(
           
           new Text(
             "50,000",
-            style: new TextStyle(fontSize: 20.0,color: Colors.red),
+            style: new TextStyle(fontSize: 16.0,color: Colors.red,decoration: TextDecoration.lineThrough,),
           ),new Padding(
             padding: const EdgeInsets.all(8.0),
             child: new Text(
               "\تومان",
-              style: new TextStyle(fontSize: 20.0,color: Colors.red),
+              style: new TextStyle(fontSize: 16.0,color: Colors.red),
             ),
           ),
           
@@ -184,12 +184,12 @@ var soldnprice = new Padding(
           
           new Text(
             "25,000",
-            style: new TextStyle(fontSize: 25.0,color: Colors.green),
+            style: new TextStyle(fontSize: 18.0,color: Colors.green),
           ),new Padding(
             padding: const EdgeInsets.all(8.0),
             child: new Text(
               "\تومان",
-              style: new TextStyle(fontSize: 20.0,color: Colors.green),
+              style: new TextStyle(fontSize: 18.0,color: Colors.green),
             ),
           ),
           

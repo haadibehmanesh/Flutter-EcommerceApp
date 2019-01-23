@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: appTitle,
+      title: appTitle,color: Colors.white,
       theme: ThemeData(fontFamily: 'Yekan'),
       home: MyHomePage(title: appTitle),
       builder: (BuildContext context, Widget child) {

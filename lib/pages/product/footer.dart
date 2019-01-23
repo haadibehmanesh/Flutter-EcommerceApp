@@ -34,7 +34,7 @@ var bottomBtns = new Padding(
                     "همین حالا خرید کنید",
                     style: new TextStyle(
                         color: Colors.white,
-                        fontSize: 18.0,
+                        fontSize: 14.0,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -86,19 +86,19 @@ class _MfooterState extends State<Mfooter> with SingleTickerProviderStateMixin {
       new Tab(
         child: new Text(
           "ویژگی ها",
-          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17.0),
+          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14.0),
         ),
       ),
       new Tab(
         child: new Text(
           "شرایط استفاده",
-          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17.0),
+          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14.0),
         ),
       ),
       new Tab(
         child: new Text(
           "نظرات",
-          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17.0),
+          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14.0),
         ),
       ),
     ];
