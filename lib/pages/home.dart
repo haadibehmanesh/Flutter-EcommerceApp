@@ -13,6 +13,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF8F8F8),
       appBar: AppBar(
         iconTheme: new IconThemeData(color: Color(0xFF005AAA)),
         backgroundColor: Colors.white,
