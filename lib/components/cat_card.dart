@@ -15,8 +15,9 @@ class MyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('رستوران و کافی شاپ'),
-          backgroundColor: Colors.red,
+            iconTheme: new IconThemeData(color: Color(0xFF005AAA)),
+          title: new Text('رستوران و کافی شاپ',style: TextStyle(color: Color(0xFF005AAA)),),
+          backgroundColor: Colors.white10,
         ),
         body: new Container(
             child: new ListView(
@@ -41,18 +42,29 @@ class CustomCard extends StatelessWidget {
                     builder: (BuildContext context) => ProductPage()),
               ),
           child: new Card(
-            child: new Column(
+          
+            child: Container(
+                      decoration: new BoxDecoration(
+    color: Colors.white,
+      border: Border.all(color: Colors.black12),
+      boxShadow: [new BoxShadow(
+            color: Colors.black54,
+            offset: Offset(1.0, 1.0),
+            blurRadius: 5.0,
+          ),]
+    ),child: new Column(
               children: <Widget>[
                 new Row(children: <Widget>[
                   Expanded(
                     child: Container(
-                      color: Colors.orange,
+                  
+                      //color: Colors.white,
                       child: new Padding(
                         padding: new EdgeInsets.all(7.0),
                         child: new Text(
                           'فست فود انجیر',
                           style: new TextStyle(
-                              color: Colors.white, fontSize: 18.0),
+                              color: Colors.black54, fontSize: 18.0),
                           textAlign: TextAlign.right,
                         ),
                       ),
@@ -198,7 +210,7 @@ class CustomCard extends StatelessWidget {
                   ),
                 ]),
               ],
-            ),
+             ), ),
           ),
         ),
       ),
