@@ -33,8 +33,98 @@ class MyHomePage extends StatelessWidget {
             child: HomeCat(),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: new Text(
+                        "ویژه ها",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 2.0),
             child: MainFeaturedScroll(),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: new Text(
+                        "رستوران وکافی شاپ",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                new Row(
+                  children: <Widget>[
+                    new Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: new Text(
+                          "بیشتر",
+                          style: TextStyle(color: Colors.green),
+                        )),
+                    new Icon(
+                      Icons.arrow_right,
+                      color: Colors.green,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 2.0),
+            child: MainCatScroll(),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: new Text(
+                        "تفریحی و ورزشی",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                new Row(
+                  children: <Widget>[
+                    new Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: new Text(
+                          "بیشتر",
+                          style: TextStyle(color: Colors.green),
+                        )),
+                    new Icon(
+                      Icons.arrow_right,
+                      color: Colors.green,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
