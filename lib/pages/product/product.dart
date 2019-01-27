@@ -18,7 +18,7 @@ class ProductPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: new IconThemeData(color: Color(0xFF005AAA)),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white70,
         title: toolbar,
       ),
       /* drawer: Drawer(

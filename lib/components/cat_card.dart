@@ -17,7 +17,7 @@ class MyCard extends StatelessWidget {
         appBar: new AppBar(
             iconTheme: new IconThemeData(color: Color(0xFF005AAA)),
           title: new Text('رستوران و کافی شاپ',style: TextStyle(color: Color(0xFF005AAA)),),
-          backgroundColor: Colors.white10,
+          backgroundColor: Colors.white70,
         ),
         body: new Container(
             child: new ListView(
