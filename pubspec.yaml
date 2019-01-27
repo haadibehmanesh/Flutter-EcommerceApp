@@ -22,15 +22,14 @@ dependencies:
   carousel_slider: ^0.0.1
   flutter_html: ^0.8.2
   url_launcher:
-  flutter_launcher_icons: "^0.7.0"
+  
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
-   
-  
+  flutter_launcher_icons: "^0.7.0"
 flutter_icons:
-  android: "launcher_icon" 
+  android: true 
   ios: true
   image_path: "assets/icon/icon.png"
 
