@@ -18,6 +18,18 @@ class MyHomePage extends StatelessWidget {
         iconTheme: new IconThemeData(color: Color(0xFF005AAA)),
         backgroundColor: Colors.white70,
         title: new Image.asset('assets/title.png'),
+        actions: <Widget>[
+          IconButton(
+            icon: new Icon(
+              Icons.notifications,
+            ),
+          ),
+          IconButton(
+            icon: new Icon(
+              Icons.shopping_cart,
+            ),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: DrawerApp(),
@@ -48,7 +60,6 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                
               ],
             ),
           ),
