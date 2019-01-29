@@ -31,13 +31,13 @@ class _AuthPageState extends State<AuthPage> {
   Widget _buildEmailTextField() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: 'E-Mail', filled: true, fillColor: Colors.white),
+          labelText: 'ایمیل', filled: true, fillColor: Colors.white),
       keyboardType: TextInputType.emailAddress,
       validator: (String value) {
         if (value.isEmpty ||
             !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                 .hasMatch(value)) {
-          return 'Please enter a valid email';
+          return 'لطفا آدرس ایمیل درست را وارد کنید';
         }
       },
       onSaved: (String value) {
@@ -49,11 +49,11 @@ class _AuthPageState extends State<AuthPage> {
   Widget _buildPasswordTextField() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: 'Password', filled: true, fillColor: Colors.white),
+          labelText: 'رمز ورود', filled: true, fillColor: Colors.white),
       obscureText: true,
       validator: (String value) {
         if (value.isEmpty || value.length < 6) {
-          return 'Password invalid';
+          return 'رمز ورود اشتباه است';
         }
       },
       onSaved: (String value) {
@@ -61,7 +61,7 @@ class _AuthPageState extends State<AuthPage> {
       },
     );
   }
-
+/*
   Widget _buildAcceptSwitch() {
     return SwitchListTile(
       value: _formData['acceptTerms'],
@@ -73,7 +73,7 @@ class _AuthPageState extends State<AuthPage> {
       title: Text('Accept Terms'),
     );
   }
-
+*/
   void _submitForm(Function login) {
     if (!_formKey.currentState.validate() || !_formData['acceptTerms']) {
       return;
@@ -89,7 +89,7 @@ class _AuthPageState extends State<AuthPage> {
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('ورود'),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -109,7 +109,7 @@ class _AuthPageState extends State<AuthPage> {
                       height: 10.0,
                     ),
                     _buildPasswordTextField(),
-                    _buildAcceptSwitch(),
+                   // _buildAcceptSwitch(),
                     SizedBox(
                       height: 10.0,
                     ),
@@ -118,7 +118,7 @@ class _AuthPageState extends State<AuthPage> {
                           MainModel model) {
                         return RaisedButton(
                           textColor: Colors.white,
-                          child: Text('LOGIN'),
+                          child: Text('ورود'),
                           onPressed: () => _submitForm(model.login),
                         );
                       },

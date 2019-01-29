@@ -5,6 +5,7 @@ import '../components/home_cat.dart';
 import '../components/bottom_navigation.dart';
 import '../components/main_featured_scroll.dart';
 import '../components/main_cat_scroll.dart';
+import '../components/cat_card.dart';
 
 class MyHomePage extends StatelessWidget {
   final String title;
@@ -19,7 +20,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.white70,
         title: new Image.asset('assets/title.png'),
         actions: <Widget>[
-          IconButton(
+          IconButton(//onPressed: (){print('');},
             icon: new Icon(
               Icons.notifications,
             ),
@@ -86,11 +87,20 @@ class MyHomePage extends StatelessWidget {
                 new Row(
                   children: <Widget>[
                     new Padding(
-                        padding: const EdgeInsets.all(0.0),
+                      padding: const EdgeInsets.all(0.0),
+                      child: new InkWell(
                         child: new Text(
                           "بیشتر",
                           style: TextStyle(color: Colors.green),
-                        )),
+                        ),
+                        onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => MyCard(),
+                              ),
+                            ),
+                      ),
+                    ),
                     new Icon(
                       Icons.arrow_right,
                       color: Colors.green,
@@ -124,10 +134,18 @@ class MyHomePage extends StatelessWidget {
                   children: <Widget>[
                     new Padding(
                         padding: const EdgeInsets.all(0.0),
+                         child: new InkWell(
                         child: new Text(
                           "بیشتر",
                           style: TextStyle(color: Colors.green),
-                        )),
+                        ),
+                        onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => MyCard(),
+                              ),
+                            ),
+                      ),),
                     new Icon(
                       Icons.arrow_right,
                       color: Colors.green,
