@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import './pages/home.dart';
 import 'package:scoped_model/scoped_model.dart';
-import './pages/auth/auth.dart';
+
 import './scoped-models/main.dart';
 import './models/product.dart';
 
@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(fontFamily: 'Yekan'),
       //home: MyHomePage(title: appTitle),
       routes: {
-          '/': (BuildContext context) => AuthPage(),
+         // '/': (BuildContext context) => AuthPage(),
         },
         onGenerateRoute: (RouteSettings settings) {
           final List<String> pathElements = settings.name.split('/');

@@ -226,6 +226,7 @@ mixin UserModel on ConnectedProductsModel {
   }
 }
 
+
 mixin UtilityModel on ConnectedProductsModel {
   bool get isLoading {
     return _isLoading;

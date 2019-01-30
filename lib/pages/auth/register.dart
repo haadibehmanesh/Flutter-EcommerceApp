@@ -4,16 +4,18 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../scoped-models/main.dart';
 
-class AuthPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _AuthPageState();
+    return _RegisterPageState();
   }
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final Map<String, dynamic> _formData = {
     'email': null,
+    'name' : null,
+    'phone' : null,
     'password': null,
     'acceptTerms': false
   };
@@ -28,6 +30,21 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 */
+Widget _buildNameTextField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'نام و نام خانوادگی', filled: true, fillColor: Colors.white),
+      keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'لطفا فیلد را به شکل صحیح پر کنید';
+        }
+      },
+      onSaved: (String value) {
+        _formData['name'] = value;
+      },
+    );
+  }
   Widget _buildEmailTextField() {
     return TextFormField(
       decoration: InputDecoration(
@@ -37,7 +54,7 @@ class _AuthPageState extends State<AuthPage> {
         if (value.isEmpty ||
             !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                 .hasMatch(value)) {
-          return 'لطفا آدرس ایمیل درست را وارد کنید';
+          return 'لطفا آدرس ایمیل را به شکل صحیح وارد کنید';
         }
       },
       onSaved: (String value) {
@@ -70,7 +87,7 @@ class _AuthPageState extends State<AuthPage> {
           _formData['acceptTerms'] = value;
         });
       },
-      title: Text('Accept Terms'),
+      title: Text('قوانین را خوانده ام'),
     );
   }
 
@@ -88,19 +105,16 @@ class _AuthPageState extends State<AuthPage> {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
     return Scaffold(
-      backgroundColor: Color(0xFFF8F8F8),
+        backgroundColor: Color(0xFFF8F8F8),
       appBar: AppBar(
         iconTheme: new IconThemeData(color: Color(0xFF005AAA)),
         backgroundColor: Colors.white70,
-        title: Text(
-          'ورود',
-          style: TextStyle(color: Color(0xFF005AAA)),
-        ),
+        title: Text('عضویت' ,style: TextStyle(color: Color(0xFF005AAA)),),
       ),
       body: Container(
         decoration: BoxDecoration(
-            //  image: _buildBackgroundImage(),
-            ),
+        //  image: _buildBackgroundImage(),
+        ),
         padding: EdgeInsets.all(10.0),
         child: Center(
           child: SingleChildScrollView(
@@ -109,7 +123,9 @@ class _AuthPageState extends State<AuthPage> {
               child: Form(
                 key: _formKey,
                 child: Column(
-                  children: <Widget>[
+                  children: <Widget>[ _buildNameTextField(),SizedBox(
+                      height: 10.0,
+                    ),
                     _buildEmailTextField(),
                     SizedBox(
                       height: 10.0,
@@ -125,7 +141,7 @@ class _AuthPageState extends State<AuthPage> {
                         return RaisedButton(
                           color: Colors.blue,
                           textColor: Colors.white,
-                          child: Text('ورود'),
+                          child: Text('ثبت نام'),
                           onPressed: () => _submitForm(model.login),
                         );
                       },
