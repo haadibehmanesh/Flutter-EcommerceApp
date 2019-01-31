@@ -14,9 +14,11 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final Map<String, dynamic> _formData = {
     'email': null,
-    'name' : null,
-    'phone' : null,
+    'name': null,
+    'phone': null,
     'password': null,
+    'confirmPassword': null,
+    'invitationCode': null,
     'acceptTerms': false
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -30,10 +32,12 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 */
-Widget _buildNameTextField() {
+  Widget _buildNameTextField() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: 'نام و نام خانوادگی', filled: true, fillColor: Colors.white),
+          labelText: 'نام و نام خانوادگی',
+          filled: true,
+          fillColor: Colors.white),
       keyboardType: TextInputType.emailAddress,
       validator: (String value) {
         if (value.isEmpty) {
@@ -45,16 +49,35 @@ Widget _buildNameTextField() {
       },
     );
   }
+
+  Widget _buildPhoneTextField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'شماره همراه', filled: true, fillColor: Colors.white),
+      keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'لطفا فیلد را به شکل صحیح پر کنید';
+        }
+      },
+      onSaved: (String value) {
+        _formData['phone'] = value;
+      },
+    );
+  }
+
   Widget _buildEmailTextField() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: 'ایمیل', filled: true, fillColor: Colors.white),
+          labelText: 'ایمیل (اختیاری)', filled: true, fillColor: Colors.white),
       keyboardType: TextInputType.emailAddress,
       validator: (String value) {
-        if (value.isEmpty ||
-            !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-                .hasMatch(value)) {
-          return 'لطفا آدرس ایمیل را به شکل صحیح وارد کنید';
+        if (value.isNotEmpty) {
+          if (!RegExp(
+                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+              .hasMatch(value)) {
+            return 'لطفا آدرس ایمیل را به شکل صحیح وارد کنید';
+          }
         }
       },
       onSaved: (String value) {
@@ -79,6 +102,33 @@ Widget _buildNameTextField() {
     );
   }
 
+  Widget _buildPasswordConfirmTextField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'تکرار رمز ورود', filled: true, fillColor: Colors.white),
+      obscureText: true,
+      validator: (String value) {
+        if (value.isEmpty || value.length < 6) {
+          return 'رمز ورود اشتباه است';
+        }
+      },
+      onSaved: (String value) {
+        _formData['confirmPassword'] = value;
+      },
+    );
+  }
+
+  Widget _buildInvitationCodeTextField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'کد دعوت', filled: true, fillColor: Colors.white),
+      keyboardType: TextInputType.emailAddress,
+      onSaved: (String value) {
+        _formData['invitationCode'] = value;
+      },
+    );
+  }
+
   Widget _buildAcceptSwitch() {
     return SwitchListTile(
       value: _formData['acceptTerms'],
@@ -87,7 +137,7 @@ Widget _buildNameTextField() {
           _formData['acceptTerms'] = value;
         });
       },
-      title: Text('قوانین را خوانده ام'),
+      title: Text('قوانین را پذیرفته ام'),
     );
   }
 
@@ -105,16 +155,19 @@ Widget _buildNameTextField() {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
     return Scaffold(
-        backgroundColor: Color(0xFFF8F8F8),
+      backgroundColor: Color(0xFFF8F8F8),
       appBar: AppBar(
         iconTheme: new IconThemeData(color: Color(0xFF005AAA)),
         backgroundColor: Colors.white70,
-        title: Text('عضویت' ,style: TextStyle(color: Color(0xFF005AAA)),),
+        title: Text(
+          'عضویت',
+          style: TextStyle(color: Color(0xFF005AAA)),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
-        //  image: _buildBackgroundImage(),
-        ),
+            //  image: _buildBackgroundImage(),
+            ),
         padding: EdgeInsets.all(10.0),
         child: Center(
           child: SingleChildScrollView(
@@ -123,7 +176,13 @@ Widget _buildNameTextField() {
               child: Form(
                 key: _formKey,
                 child: Column(
-                  children: <Widget>[ _buildNameTextField(),SizedBox(
+                  children: <Widget>[
+                    _buildNameTextField(),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    _buildPhoneTextField(),
+                    SizedBox(
                       height: 10.0,
                     ),
                     _buildEmailTextField(),
@@ -131,7 +190,18 @@ Widget _buildNameTextField() {
                       height: 10.0,
                     ),
                     _buildPasswordTextField(),
-                    _buildAcceptSwitch(),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    _buildPasswordConfirmTextField(),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    _buildInvitationCodeTextField(),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    //_buildAcceptSwitch(),
                     SizedBox(
                       height: 10.0,
                     ),
