@@ -78,7 +78,7 @@ class MyHomePage extends StatelessWidget {
                     new Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: new Text(
-                        "رستوران وکافی شاپ",
+                        "رستوران و کافی شاپ",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),

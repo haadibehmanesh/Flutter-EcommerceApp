@@ -75,7 +75,7 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   void _submitForm(Function login) {
-    if (!_formKey.currentState.validate() || !_formData['acceptTerms']) {
+    if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
@@ -115,7 +115,7 @@ class _AuthPageState extends State<AuthPage> {
                       height: 10.0,
                     ),
                     _buildPasswordTextField(),
-                    _buildAcceptSwitch(),
+                   // _buildAcceptSwitch(),
                     SizedBox(
                       height: 10.0,
                     ),
