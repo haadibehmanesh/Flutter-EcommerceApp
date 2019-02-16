@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../scoped-models/main.dart';
+import '../../models/auth.dart';
 
 class AuthPage extends StatefulWidget {
   @override
@@ -13,11 +14,14 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   final Map<String, dynamic> _formData = {
-    'email': null,
+    'name': null,
+    'phone': null,
     'password': null,
+    'invitationCode': null,
     'acceptTerms': false
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  AuthMode _authMode = AuthMode.Login;
 /*
   DecorationImage _buildBackgroundImage() {
     return DecorationImage(
@@ -28,20 +32,18 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 */
-  Widget _buildEmailTextField() {
+  Widget _buildPhoneTextField() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: 'ایمیل', filled: true, fillColor: Colors.white),
+          labelText: 'شماره همراه', filled: true, fillColor: Colors.white),
       keyboardType: TextInputType.emailAddress,
       validator: (String value) {
-        if (value.isEmpty ||
-            !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-                .hasMatch(value)) {
-          return 'لطفا آدرس ایمیل درست را وارد کنید';
+        if (value.isEmpty) {
+          return 'لطفا شماره همراه را وارد کنید';
         }
       },
       onSaved: (String value) {
-        _formData['email'] = value;
+        _formData['phone'] = value;
       },
     );
   }
@@ -74,13 +76,64 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 
-  void _submitForm(Function login) {
+  Widget _buildInvitationCodeTextField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'کد دعوت', filled: true, fillColor: Colors.white),
+      keyboardType: TextInputType.emailAddress,
+      onSaved: (String value) {
+        _formData['invitationCode'] = value;
+      },
+    );
+  }
+
+  Widget _buildNameTextField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'نام و نام خانوادگی',
+          filled: true,
+          fillColor: Colors.white),
+      keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'لطفا فیلد را به شکل صحیح پر کنید';
+        }
+      },
+      onSaved: (String value) {
+        _formData['name'] = value;
+      },
+    );
+  }
+
+  void _submitForm(Function authenticate) async {
     if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
-    login(_formData['email'], _formData['password']);
-    Navigator.pushReplacementNamed(context, '/products');
+    Map<String, dynamic> successInformation;
+    successInformation =
+        await authenticate(_formData['name'],_formData['phone'], _formData['password'],_formData['invitationCode'],_authMode);
+    print(successInformation['success']);
+    if (successInformation['success']) {
+      // Navigator.pushReplacementNamed(context, '/');
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(successInformation['message']),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('تلاش دوباره'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -93,7 +146,7 @@ class _AuthPageState extends State<AuthPage> {
         iconTheme: new IconThemeData(color: Color(0xFF005AAA)),
         backgroundColor: Colors.white70,
         title: Text(
-          'ورود',
+          'ورود / عضویت',
           style: TextStyle(color: Color(0xFF005AAA)),
         ),
       ),
@@ -110,24 +163,52 @@ class _AuthPageState extends State<AuthPage> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    _buildEmailTextField(),
+                    _authMode == AuthMode.Signup
+                        ? _buildNameTextField()
+                        : Container(),
+                    _buildPhoneTextField(),
                     SizedBox(
                       height: 10.0,
                     ),
                     _buildPasswordTextField(),
-                   // _buildAcceptSwitch(),
+                    // _buildAcceptSwitch(),
                     SizedBox(
+                      height: 10.0,
+                    ),
+
+                    _authMode == AuthMode.Signup
+                        ? _buildInvitationCodeTextField()
+                        : Container(),
+                     SizedBox(
                       height: 10.0,
                     ),
                     ScopedModelDescendant<MainModel>(
                       builder: (BuildContext context, Widget child,
                           MainModel model) {
-                        return RaisedButton(
-                          color: Colors.blue,
-                          textColor: Colors.white,
-                          child: Text('ورود'),
-                          onPressed: () => _submitForm(model.login),
-                        );
+                        return model.isLoading
+                            ? CircularProgressIndicator()
+                            : RaisedButton(
+                                color: Colors.blue,
+                                textColor: Colors.white,
+                                child: Text(_authMode == AuthMode.Login
+                                    ? 'ورود'
+                                    : 'عضویت'),
+                                onPressed: () => _submitForm(model.authenticate),
+                              );
+                      },
+                    ),    SizedBox(
+                      height: 10.0,
+                    ),
+                    FlatButton(
+                      color: Colors.green,
+                      child: Text(
+                          'برو به ${_authMode == AuthMode.Login ? ' ثبت نام' : 'ورود'}',style: TextStyle(color: Colors.white),),
+                      onPressed: () {
+                        setState(() {
+                          _authMode = _authMode == AuthMode.Login
+                              ? AuthMode.Signup
+                              : AuthMode.Login;
+                        });
                       },
                     ),
                   ],

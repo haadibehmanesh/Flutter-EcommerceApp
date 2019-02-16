@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class User {
-  final String id;
-  final String email;
-  final String password;
+  final int id;
+  final String phone;
+  final String name;
+  final String token;
 
-  User({@required this.id, @required this.email, @required this.password});
+  User({@required this.id, @required this.phone,@required this.name,@required this.token});
 }

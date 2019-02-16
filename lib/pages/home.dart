@@ -1,18 +1,30 @@
 import 'package:flutter/material.dart';
 import '../components/drawer_app.dart';
+import 'package:scoped_model/scoped_model.dart';
 import '../components/carousel_with_indicator.dart';
 import '../components/home_cat.dart';
 import '../components/bottom_navigation.dart';
 import '../components/main_featured_scroll.dart';
 import '../components/main_cat_scroll.dart';
 import '../components/cat_card.dart';
-
-class MyHomePage extends StatelessWidget {
+import '../scoped-models/main.dart';
+class MyHomePage extends StatefulWidget {
+  final MainModel model;
   final String title;
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage(this.model,this.title);
 
   @override
+  State<StatefulWidget> createState() {
+    return _MyHomePageState();
+  }
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+ 
+  @override
   Widget build(BuildContext context) {
+            
+    
     return Scaffold(
       backgroundColor: Color(0xFFF8F8F8),
       appBar: AppBar(
@@ -164,4 +176,6 @@ class MyHomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationDemo(),
     );
   }
+
 }
+

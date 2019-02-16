@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../pages/auth/auth.dart';
-import '../pages/auth/register.dart';
+import '../pages/auth/logout.dart';
 
 const String _profilepic = 'assets/male-user-shadow.png';
 
@@ -34,25 +34,11 @@ class _DrawerAppState extends State<DrawerApp> {
               padding: const EdgeInsets.only(top: 8.0),
               children: <Widget>[
                 // The initial contents of the drawer
-                ListTile(
-                  leading: const Icon(Icons.account_circle),
-                  title: const Text('ورود'),
-                  onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => AuthPage()),
-                      ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.person_add),
-                  title: const Text('عضویت'),
-                  onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => RegisterPage()),
-                      ),
-                ),
-                Divider(),
+               
+               
+                 
+          Logout(),
+          Divider(),
                 ListTile(
                   leading: const Icon(Icons.category),
                   title: const Text('دسته بندی ها'),

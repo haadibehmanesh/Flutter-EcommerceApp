@@ -3,9 +3,11 @@ import 'dart:async';
 
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rxdart/subjects.dart';
 import '../models/product.dart';
 import '../models/user.dart';
+import '../models/auth.dart';
 
 mixin ConnectedProductsModel on Model {
   List<Product> _products = [];
@@ -62,8 +64,8 @@ mixin ProductsModel on ConnectedProductsModel {
       'image':
           'https://upload.wikimedia.org/wikipedia/commons/6/68/Chocolatebrownie.JPG',
       'price': price,
-      'userEmail': _authenticatedUser.email,
-      'userId': _authenticatedUser.id
+      //'userEmail': _authenticatedUser.phone,
+      //'userId': _authenticatedUser.id
     };
     try {
       final http.Response response = await http.post(
@@ -77,13 +79,14 @@ mixin ProductsModel on ConnectedProductsModel {
       }
       final Map<String, dynamic> responseData = json.decode(response.body);
       final Product newProduct = Product(
-          id: responseData['name'],
-          title: title,
-          description: description,
-          image: image,
-          price: price,
-          userEmail: _authenticatedUser.email,
-          userId: _authenticatedUser.id);
+        id: responseData['name'],
+        title: title,
+        description: description,
+        image: image,
+        price: price,
+        //userPhone: _authenticatedUser.phone,
+        //userId: _authenticatedUser.id
+      );
       _products.add(newProduct);
       _isLoading = false;
       notifyListeners();
@@ -110,7 +113,7 @@ mixin ProductsModel on ConnectedProductsModel {
       'image':
           'https://upload.wikimedia.org/wikipedia/commons/6/68/Chocolatebrownie.JPG',
       'price': price,
-      'userEmail': selectedProduct.userEmail,
+      'userEmail': selectedProduct.userPhone,
       'userId': selectedProduct.userId
     };
     return http
@@ -125,7 +128,7 @@ mixin ProductsModel on ConnectedProductsModel {
           description: description,
           image: image,
           price: price,
-          userEmail: selectedProduct.userEmail,
+          userPhone: selectedProduct.userPhone,
           userId: selectedProduct.userId);
       _products[selectedProductIndex] = updatedProduct;
       notifyListeners();
@@ -177,7 +180,7 @@ mixin ProductsModel on ConnectedProductsModel {
             description: productData['description'],
             image: productData['image'],
             price: productData['price'],
-            userEmail: productData['userEmail'],
+            userPhone: productData['userPhone'],
             userId: productData['userId']);
         fetchedProductList.add(product);
       });
@@ -201,7 +204,7 @@ mixin ProductsModel on ConnectedProductsModel {
         description: selectedProduct.description,
         price: selectedProduct.price,
         image: selectedProduct.image,
-        userEmail: selectedProduct.userEmail,
+        userPhone: selectedProduct.userPhone,
         userId: selectedProduct.userId,
         isFavorite: newFavoriteStatus);
     _products[selectedProductIndex] = updatedProduct;
@@ -220,12 +223,119 @@ mixin ProductsModel on ConnectedProductsModel {
 }
 
 mixin UserModel on ConnectedProductsModel {
-  void login(String email, String password) {
-    _authenticatedUser =
-        User(id: 'fdalsdfasf', email: email, password: password);
-  }
-}
+  Timer _authTimer;
+  PublishSubject<bool> _userSubject = PublishSubject();
 
+  User get user {
+    return _authenticatedUser;
+  }
+
+  PublishSubject<bool> get userSubject {
+    return _userSubject;
+  }
+
+  Future<Map<String, dynamic>> authenticate(
+      String name, String phone, String password, String invitationCode,
+      [AuthMode mode = AuthMode.Login]) async {
+    _isLoading = true;
+    notifyListeners();
+
+    http.Response response;
+    if (mode == AuthMode.Login) {
+      final Map<String, dynamic> authData = {
+        'phone': phone,
+        'password': password,
+        'returnSecureToken': true
+      };
+      response = await http.post(
+        'https://boninja.com/api/login',
+        body: json.encode(authData),
+        headers: {'Content-Type': 'application/json'},
+      );
+    } else {
+      final Map<String, dynamic> authData = {
+        'name': name,
+        'phone': phone,
+        'password': password,
+        'invitationCode': invitationCode,
+        'returnSecureToken': true
+      };
+      response = await http.post(
+        'https://boninja.com/api/register',
+        body: json.encode(authData),
+        headers: {'Content-Type': 'application/json'},
+      );
+    }
+
+    final Map<String, dynamic> responseData = json.decode(response.body);
+    bool hasError = true;
+    String message = 'مشکلی پیش آمده است!';
+    print(responseData);
+    if (responseData.containsKey('success')) {
+      hasError = false;
+      message = 'you are logged in';
+      print(message);
+      final String token = responseData['success']['token'];
+      final http.Response response = await http.post(
+        'https://boninja.com/api/details',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${token}'
+        },
+      );
+      final Map<String, dynamic> responseUser = json.decode(response.body);
+
+      final String name = responseUser['success']['name'];
+      final String phone = responseUser['success']['phone'];
+      final int id = responseUser['success']['id'];
+      print(name);
+      _authenticatedUser = User(id: id, phone: phone, name: name, token: token);
+      _userSubject.add(true);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', token);
+      prefs.setString('userPhone', phone);
+      prefs.setString('userName', name);
+      prefs.setInt('userId', id);
+      
+    } else if (responseData.containsKey('error')) {
+      message = 'کاربری با این مشخصات وجود ندارد!';
+      if(responseData['error'] == 'hasBeen'){
+         message = 'شما قبلا ثبت نام کرده اید!';
+      }
+    }
+    _isLoading = false;
+    notifyListeners();
+    return {'success': !hasError, 'message': message};
+  }
+
+  void autoAuthenticate() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString('token');
+    if (token != null) {
+      final String userName = prefs.getString('userName');
+      final String userPhone = prefs.getString('userPhone');
+      final int userId = prefs.getInt('userId');
+      _authenticatedUser =
+          User(id: userId, phone: userPhone, name: userName, token: token);
+      _userSubject.add(true);
+      notifyListeners();
+      //return;
+    }
+  }
+  void logout() async {
+    _authenticatedUser = null;
+   //_authTimer.cancel();
+    _userSubject.add(false);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('id');
+    prefs.remove('phone');
+    prefs.remove('name');
+    prefs.remove('token');
+  }
+
+
+ 
+}
 
 mixin UtilityModel on ConnectedProductsModel {
   bool get isLoading {
